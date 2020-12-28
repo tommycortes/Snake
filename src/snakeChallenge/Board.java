@@ -18,8 +18,8 @@ public class Board {
         board[1] = row;
     }
 
+    //If the snake cell's coordenates are inside the board returns true
     public boolean onBoard(SnakeCell s) {
-
         return (((0 <= s.snakeCellCol()) && (s.snakeCellCol() < this.boardCol()))
                 && ((0 <= s.snakeCellRow()) && (s.snakeCellRow() < this.boardRow())));
     }

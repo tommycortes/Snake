@@ -7,7 +7,9 @@ package snakeChallenge;
 
 /**
  *
- * @author TommyCortés
+ * @author tommycortes
+ * 
+ * SnakeCell stands for the small parts that form the snake
  */
 public class SnakeCell {
 
@@ -18,6 +20,7 @@ public class SnakeCell {
         snakeCell[1] = row;
     }
     
+    //snake cell's compare
     public boolean equals(SnakeCell s){
         return((snakeCell[0] == s.snakeCellCol()) && (snakeCell[1] == s.snakeCellRow()));
     }
