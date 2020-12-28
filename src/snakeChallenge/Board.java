@@ -19,9 +19,9 @@ public class Board {
     }
 
     //If the snake cell's coordenates are inside the board returns true
-    public boolean onBoard(SnakeCell s) {
-        return (((0 <= s.snakeCellCol()) && (s.snakeCellCol() < this.boardCol()))
-                && ((0 <= s.snakeCellRow()) && (s.snakeCellRow() < this.boardRow())));
+    public boolean onBoard(SnakeCell sc) {
+        return (((0 <= sc.getSnakeCellCol()) && (sc.getSnakeCellCol() < this.boardCol()))
+                && ((0 <= sc.getSnakeCellRow()) && (sc.getSnakeCellRow() < this.boardRow())));
     }
 
     private int boardCol() {

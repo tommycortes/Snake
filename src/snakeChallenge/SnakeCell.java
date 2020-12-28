@@ -22,14 +22,14 @@ public class SnakeCell {
     
     //snake cell's compare
     public boolean equals(SnakeCell s){
-        return((snakeCell[0] == s.snakeCellCol()) && (snakeCell[1] == s.snakeCellRow()));
+        return((snakeCell[0] == s.getSnakeCellCol()) && (snakeCell[1] == s.getSnakeCellRow()));
     }
     
-    public int snakeCellCol(){
+    public int getSnakeCellCol(){
         return snakeCell[0];
     }
     
-    public int snakeCellRow(){
+    public int getSnakeCellRow(){
         return snakeCell[1];
     }
 }

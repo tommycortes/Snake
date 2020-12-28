@@ -10,38 +10,74 @@ package snakeChallenge;
  * @author tommycortes
  */
 public class Snake {
-    
+
     SnakeCell[] snake;
-    
+
     Snake(int length) {
         snake = new SnakeCell[length];
     }
-    
-    public boolean headIsValid(int[] board) {
-        boolean b = true;
-        for (int i = 1; i < snake.length; i++) {
-            if (this.head().equals(snake[i])) {
-                b = false;
+
+    public boolean headIsValid(SnakeCell head, Board board) {
+
+        boolean b = board.onBoard(head);
+        if (b) {
+            for (int i = 1; i < snake.length; i++) {
+                if (head.equals(snake[i])) {
+                    b = false;
+                }
             }
         }
         return b;
     }
-    
+
+    public SnakeCell getHead() {
+        return snake[0];
+    }
+
+    public void setHead(SnakeCell sc) {
+        snake[0] = sc;
+    }
+
+    //check if the head can move to a valid position, if its true moves the head
+    public boolean moveHead(char dir, Board board) {
+        SnakeCell head = this.getHead();
+        SnakeCell newHead = new SnakeCell(-1, -1);
+        boolean b = false;
+        switch (dir) {
+            case 'u'://row--
+                newHead = new SnakeCell(head.getSnakeCellCol(), head.getSnakeCellRow() - 1);
+                break;
+            case 'l'://col --
+                newHead = new SnakeCell(head.getSnakeCellCol() - 1, head.getSnakeCellRow());
+                break;
+            case 'd'://row++
+                newHead = new SnakeCell(head.getSnakeCellCol(), head.getSnakeCellRow() + 1);
+                break;
+            case 'r'://col++
+                newHead = new SnakeCell(head.getSnakeCellCol() + 1, head.getSnakeCellRow());
+                break;
+            default:
+                break;
+        }
+        if (headIsValid(newHead, board)) {
+            head = newHead;
+            b = true;
+        }
+        return b;
+    }
+
+    //para el final
     public boolean snakeIsValid() {
         return true;
     }
     
-    public SnakeCell head() {
-        return snake[0];
-    }
-    
-    public void moveSnake(SnakeCell h, Snake s, char dir) {
-        snake[0] = h;
+    public void moveSnake(Snake s) {
+        snake[0] = s.getHead();
         for (int i = 1; i < snake.length; i++) {
             snake[i] = s.getCell(i - 1);
         }
     }
-    
+
     public SnakeCell getCell(int i) {
         return snake[i];
     }
