@@ -48,7 +48,7 @@ public class SnakeCell {
 
         return b;
     }
-
+    //return true if the cell is on the board
     public boolean cellOnBoard(Board board) {
         return (((0 <= this.getSnakeCellCol()) && (this.getSnakeCellCol() < board.boardCol())))
                 && ((0 <= this.getSnakeCellRow()) && (this.getSnakeCellRow() < board.boardRow()));

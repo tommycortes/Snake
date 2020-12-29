@@ -21,10 +21,6 @@ public class Snake {
         return snake[0];
     }
 
-    public void setHead(SnakeCell sc) {
-        snake[0] = sc;
-    }
-
     //moves the snake and returns true if is in a valid position
     public boolean moveSnake(Snake s, char dir, Board board) {
         SnakeCell head = s.getHead();
@@ -46,6 +42,7 @@ public class Snake {
                 newHead = new SnakeCell(-1, -1);
                 break;
         }
+        //comentar esta movida
         if (newHead.cellOnBoard(board)) {
             this.moveBody(newHead, s);
             return this.snakeIsValid(board);
@@ -61,15 +58,15 @@ public class Snake {
                 this.snake[i] = s.getCell(i - 1);
                 System.out.println(this.snake[i].getSnakeCellCol() + "," + this.snake[i].getSnakeCellRow());
             }
+            System.out.println("--");
     }
     public boolean snakeIsValid(Board board) {
-        boolean b = true;
         for (int i = 0; i < snake.length; i++) {
             if(snake[i].cellOverlap(this)||!snake[i].cellOnBoard(board)){
-                b = false;
+                return false;
             }
         }
-        return b;
+        return true;
     }
 
     public SnakeCell getCell(int i) {
