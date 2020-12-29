@@ -1,5 +1,5 @@
 # Snake
-Algorithm and data structures
+## Algorithm and data structures
 
   Consider a rectangular board consisting of n × m cells. There is a snake lying on some of the
 cells, and all of the other cells are empty. The snake consists of one or more cells such that
@@ -16,3 +16,8 @@ The path is a sequence of characters L, R, D, and U(corresponding to left, right
 respectively) describing the movements of snake's head on each turn. How many distinct
 valid paths of length p can the snake make on the board?
 
+## Comentarios
+  He optado por usar el esquema general de backtracking  
+  He creado un menu muy cuco para ejecutar los tests proporcionados  
+  Si se quieren añadir más pruebas hay que modificar el código  
+  
