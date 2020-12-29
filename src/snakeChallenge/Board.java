@@ -18,17 +18,11 @@ public class Board {
         board[1] = row;
     }
 
-    //If the snake cell's coordenates are inside the board returns true
-    public boolean onBoard(SnakeCell sc) {
-        return (((0 <= sc.getSnakeCellCol()) && (sc.getSnakeCellCol() < this.boardCol()))
-                && ((0 <= sc.getSnakeCellRow()) && (sc.getSnakeCellRow() < this.boardRow())));
-    }
-
-    private int boardCol() {
+    public int boardCol() {
         return board[0];
     }
 
-    private int boardRow() {
+    public int boardRow() {
         return board[1];
     }
 }

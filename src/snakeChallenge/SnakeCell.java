@@ -8,7 +8,7 @@ package snakeChallenge;
 /**
  *
  * @author tommycortes
- * 
+ *
  * SnakeCell stands for the small parts that form the snake
  */
 public class SnakeCell {
@@ -19,21 +19,38 @@ public class SnakeCell {
         snakeCell[0] = col;
         snakeCell[1] = row;
     }
-    
+
     //snake cell's compare
-    public boolean equals(SnakeCell s){
-        return((snakeCell[0] == s.getSnakeCellCol()) && (snakeCell[1] == s.getSnakeCellRow()));
+    public boolean equals(SnakeCell s) {
+        return ((snakeCell[0] == s.getSnakeCellCol()) && (snakeCell[1] == s.getSnakeCellRow()));
     }
-    
-    public int getSnakeCellCol(){
+
+    public int getSnakeCellCol() {
         return snakeCell[0];
     }
-    
-    public int getSnakeCellRow(){
+
+    public int getSnakeCellRow() {
         return snakeCell[1];
     }
-    
-     public boolean invalidCell(){
-        return((this.getSnakeCellCol() == -1) && (this.getSnakeCellRow() == -1));
+
+    public boolean cellOverlap(Snake s) {
+        boolean b = false;
+        int lap = 0;
+        for (int i = 0; i < s.snake.length; i++) {
+            if (this.equals(s.snake[i])) {
+                lap++;
+            }
+        }
+        //lap + lap = overlap xd
+        if(lap == 2){
+            b = true;
+        }
+
+        return b;
+    }
+
+    public boolean cellOnBoard(Board board) {
+        return (((0 <= this.getSnakeCellCol()) && (this.getSnakeCellCol() < board.boardCol())))
+                && ((0 <= this.getSnakeCellRow()) && (this.getSnakeCellRow() < board.boardRow()));
     }
 }

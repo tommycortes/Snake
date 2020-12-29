@@ -17,20 +17,6 @@ public class Snake {
         snake = new SnakeCell[length];
     }
 
-    public boolean headIsValid(SnakeCell head, Board board) {
-
-        boolean b = board.onBoard(head);
-        if (b) {
-            for (int i = 1; i < snake.length; i++) {
-                //System.out.println(head.equals(this.snake[i]));
-                if (head.equals(this.snake[i])) {
-                    b = false;
-                }
-            }
-        }
-        return b;
-    }
-
     public SnakeCell getHead() {
         return snake[0];
     }
@@ -39,10 +25,10 @@ public class Snake {
         snake[0] = sc;
     }
 
-    //returns the new head only it does a valid move
-    public SnakeCell moveHead(char dir, Board board) {
-        SnakeCell head = this.getHead();
-        SnakeCell newHead = new SnakeCell(-1, -1);
+    //moves the snake and returns true if is in a valid position
+    public boolean moveSnake(Snake s, char dir, Board board) {
+        SnakeCell head = s.getHead();
+        SnakeCell newHead;
         switch (dir) {
             case 'u'://row--
                 newHead = new SnakeCell(head.getSnakeCellCol(), head.getSnakeCellRow() - 1);
@@ -57,28 +43,33 @@ public class Snake {
                 newHead = new SnakeCell(head.getSnakeCellCol() + 1, head.getSnakeCellRow());
                 break;
             default:
+                newHead = new SnakeCell(-1, -1);
                 break;
         }
-        
-        if (headIsValid(newHead, board)) {
-            return newHead;
-        } else {
-            return newHead = new SnakeCell(-1, -1);
+        if (newHead.cellOnBoard(board)) {
+            this.moveBody(newHead, s);
+            return this.snakeIsValid(board);
+        }else{
+            return false;
         }
     }
 
-    //para el final
-    public boolean snakeIsValid() {
-        return true;
-    }
-
-    public void moveSnake(Snake s, SnakeCell newHead) {
+    private void moveBody(SnakeCell newHead, Snake s){
         this.snake[0] = newHead;
-        System.out.println(this.snake[0].getSnakeCellCol()+","+this.snake[0].getSnakeCellRow());
-        for (int i = 1; i < snake.length; i++) {
-            this.snake[i] = s.getCell(i - 1);
-            System.out.println(this.snake[i].getSnakeCellCol()+","+this.snake[i].getSnakeCellRow());
+            System.out.println(this.snake[0].getSnakeCellCol() + "," + this.snake[0].getSnakeCellRow());
+            for (int i = 1; i < snake.length; i++) {
+                this.snake[i] = s.getCell(i - 1);
+                System.out.println(this.snake[i].getSnakeCellCol() + "," + this.snake[i].getSnakeCellRow());
+            }
+    }
+    public boolean snakeIsValid(Board board) {
+        boolean b = true;
+        for (int i = 0; i < snake.length; i++) {
+            if(snake[i].cellOverlap(this)||!snake[i].cellOnBoard(board)){
+                b = false;
+            }
         }
+        return b;
     }
 
     public SnakeCell getCell(int i) {
