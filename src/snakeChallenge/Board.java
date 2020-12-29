@@ -21,6 +21,7 @@ public class Board {
         board[1] = row;
         if(!this.isValid()){
             System.err.println("Invalid Board");
+            System.exit(0);
         }
     }
 
