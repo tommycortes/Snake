@@ -22,17 +22,18 @@ public class SnakeCell {
 
     //snake cell's compare
     public boolean equals(SnakeCell s) {
-        return ((snakeCell[0] == s.getSnakeCellCol()) && (snakeCell[1] == s.getSnakeCellRow()));
+        return ((snakeCell[0] == s.getCol()) && (snakeCell[1] == s.getRow()));
     }
 
-    public int getSnakeCellCol() {
+    public int getCol() {
         return snakeCell[0];
     }
 
-    public int getSnakeCellRow() {
+    public int getRow() {
         return snakeCell[1];
     }
 
+    //Returns ture if the snake is overlaping itself
     public boolean cellOverlap(Snake s) {
         boolean b = false;
         int lap = 0;
@@ -50,7 +51,7 @@ public class SnakeCell {
     }
     //return true if the cell is on the board
     public boolean cellOnBoard(Board board) {
-        return (((0 <= this.getSnakeCellCol()) && (this.getSnakeCellCol() < board.boardCol())))
-                && ((0 <= this.getSnakeCellRow()) && (this.getSnakeCellRow() < board.boardRow()));
+        return (((0 <= this.getCol()) && (this.getCol() < board.boardCol())))
+                && ((0 <= this.getRow()) && (this.getRow() < board.boardRow()));
     }
 }
