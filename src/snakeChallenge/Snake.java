@@ -22,7 +22,8 @@ public class Snake {
         boolean b = board.onBoard(head);
         if (b) {
             for (int i = 1; i < snake.length; i++) {
-                if (head.equals(snake[i])) {
+                //System.out.println(head.equals(this.snake[i]));
+                if (head.equals(this.snake[i])) {
                     b = false;
                 }
             }
@@ -38,11 +39,10 @@ public class Snake {
         snake[0] = sc;
     }
 
-    //check if the head can move to a valid position, if its true moves the head
-    public boolean moveHead(char dir, Board board) {
+    //returns the new head only it does a valid move
+    public SnakeCell moveHead(char dir, Board board) {
         SnakeCell head = this.getHead();
         SnakeCell newHead = new SnakeCell(-1, -1);
-        boolean b = false;
         switch (dir) {
             case 'u'://row--
                 newHead = new SnakeCell(head.getSnakeCellCol(), head.getSnakeCellRow() - 1);
@@ -59,27 +59,30 @@ public class Snake {
             default:
                 break;
         }
+        
         if (headIsValid(newHead, board)) {
-            head = newHead;
-            b = true;
+            return newHead;
+        } else {
+            return newHead = new SnakeCell(-1, -1);
         }
-        return b;
     }
 
     //para el final
     public boolean snakeIsValid() {
         return true;
     }
-    
-    public void moveSnake(Snake s) {
-        snake[0] = s.getHead();
+
+    public void moveSnake(Snake s, SnakeCell newHead) {
+        this.snake[0] = newHead;
+        System.out.println(this.snake[0].getSnakeCellCol()+","+this.snake[0].getSnakeCellRow());
         for (int i = 1; i < snake.length; i++) {
-            snake[i] = s.getCell(i - 1);
+            this.snake[i] = s.getCell(i - 1);
+            System.out.println(this.snake[i].getSnakeCellCol()+","+this.snake[i].getSnakeCellRow());
         }
     }
 
     public SnakeCell getCell(int i) {
-        return snake[i];
+        return this.snake[i];
     }
 
     //provisional

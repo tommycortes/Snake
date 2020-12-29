@@ -32,4 +32,8 @@ public class SnakeCell {
     public int getSnakeCellRow(){
         return snakeCell[1];
     }
+    
+     public boolean invalidCell(){
+        return((this.getSnakeCellCol() == -1) && (this.getSnakeCellRow() == -1));
+    }
 }
